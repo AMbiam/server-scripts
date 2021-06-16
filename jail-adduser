@@ -1,0 +1,9 @@
+#Receive inputs
+if [ -z "@1" ]
+  then
+    echo "Username not Given"
+    exit
+fi
+
+adduser $1
+usermod -aG jailed $1
