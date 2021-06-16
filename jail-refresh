@@ -1,4 +1,3 @@
-#!/usr/bin/env
 #Refresh Files for user jail
 
 if [ -z "@1" ]
