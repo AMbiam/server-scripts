@@ -1,7 +1,7 @@
 #!/usr/bin/env
 #Refresh Files for user jail
 
-if [ -z "$" ]
+if [ -z "@1" ]
  then
   echo "Username not given"
 fi
