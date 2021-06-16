@@ -1,0 +1,44 @@
+#Receive inputs
+if [ -z "@1" ]
+  then
+    echo "Username not Given"
+    exit
+fi
+
+adduser $1
+usermod -aG jailed $1
+root@localhost:/home/acmbiam/jutsu# cat jail-create
+#Receive inputs
+if [ -z "@1" ]
+  then
+    echo "Username not Given"
+    exit
+fi
+
+#Initialize Variables
+usermod -aG jailed $1
+D="/home/$1"
+
+#Make Required Directories
+mkdir -p $D
+mkdir -p $D/dev
+mkdir -p $D/lib64/
+mkdir -p $D/lib/x86_64-linux-gnu/
+mkdir -p $D/bin
+mkdir -p $D/home
+mkdir -p $D/etc
+
+#Create Files
+mknod -m 666 $D/dev/null c 1 3
+mknod -m 666 $D/dev/tty c 5 0
+mknod -m 666 $D/dev/zero c 1 5
+mknod -m 666 $D/dev/random c 1 8
+cp -v /bin/bash $D/bin
+cp -v /lib/x86_64-linux-gnu/{libdl.so.2,libtinfo.so.6,libc.so.6} $D/lib/
+cp -v /lib64/ld-linux-x86-64.so.2 $D/lib64/
+cp -va /lib/x86_64-linux-gnu/libnss_files* $D/lib/x86_64-linux-gnu/
+cp -vf /etc/{passwd,group} $D/etc/
+
+chown root:root $D
+chmod 0755 $D
+chown $1:$1 $D/home
