@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Argument validation check
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 <database> <user> <password>"
+    exit 1
+fi
+
+DBASE=$1
+USER=$2
+PASSW=$3
+
+# -- Source - https://stackoverflow.com/a/1720254
+# -- Posted by Dan McGrath, modified by community. See post 'Timeline' for change history
+# -- Retrieved 2026-03-30, License - CC BY-SA 3.0
+
+
+# INIT New Database
+mysql -u root -e "CREATE DATABASE $DBASE";
+# OR % for any domain
+mysql -u root -e "CREATE USER '$USER'@'172.19.0.1' IDENTIFIED BY '$PASSW'";
+mysql -u root -e "GRANT ALL PRIVILEGES ON $DBASE.* TO '$USER'@'172.19.0.1'";

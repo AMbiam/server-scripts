@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Argument validation check
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <package name>"
+    exit 1
+fi
+
+PACKAGENAME=$1
+PACKAGEROOTDIR="custom-$PACKAGENAME-package"
+
+mkdir ./$PACKAGEROOTDIR/
+mkdir ./$PACKAGEROOTDIR/custom-$PACKAGENAME-package
+touch ./$PACKAGEROOTDIR/.notes
+touch ./$PACKAGEROOTDIR/LICENSE.txt
+touch ./$PACKAGEROOTDIR/README.md
+touch ./$PACKAGEROOTDIR/run.py
+touch ./$PACKAGEROOTDIR/setup.py
+touch ./$PACKAGEROOTDIR/pytest.ini
+
+echo 'from setuptools import find_packages, setup' >> ./$PACKAGEROOTDIR/setup.py
+echo '' >> ./$PACKAGEROOTDIR/setup.py
+echo 'with open("pckg/Readme.md", "r") as f:' >> ./$PACKAGEROOTDIR/setup.py
+echo '	long_description = f.read()' >> ./$PACKAGEROOTDIR/setup.py
+echo '' >> ./$PACKAGEROOTDIR/setup.py
+echo 'setup(' >> ./$PACKAGEROOTDIR/setup.py
+echo '	name="",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	version="0.0.0",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	description="",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	package_dir={"":"pckg"},' >> ./$PACKAGEROOTDIR/setup.py
+echo '	packages=find_packages(where="pckg"),' >> ./$PACKAGEROOTDIR/setup.py
+echo '	long_description=long_description,' >> ./$PACKAGEROOTDIR/setup.py
+echo '	long_description_content_type="text/markdown",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	url="githubaddress",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	author="drewmb",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	author_email="andrew.mbiam@gmail.com",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	license="MIT",' >> ./$PACKAGEROOTDIR/setup.py
+echo '	classifiers=[],' >> ./$PACKAGEROOTDIR/setup.py
+echo '	install_requires=[],' >> ./$PACKAGEROOTDIR/setup.py
+echo '	extras_require={' >> ./$PACKAGEROOTDIR/setup.py
+echo '		"dev": ["pytest>=7.0"],' >> ./$PACKAGEROOTDIR/setup.py
+echo '	},' >> ./$PACKAGEROOTDIR/setup.py
+echo '	python_requires=">=3.13",' >> ./$PACKAGEROOTDIR/setup.py
+echo '' >> ./$PACKAGEROOTDIR/setup.py
+echo ')' >> ./$PACKAGEROOTDIR/setup.py
+
+
+
+
+
+mkdir ./$PACKAGEROOTDIR/tests
+mkdir ./$PACKAGEROOTDIR/tests/unit
+mkdir ./$PACKAGEROOTDIR/tests/integration
+mkdir ./$PACKAGEROOTDIR/tests/functional
+mkdir ./$PACKAGEROOTDIR/tests/performance
+
+#Where the main imports go.
+mkdir -p ./$PACKAGEROOTDIR/pckg/$PACKAGENAME/src
+
+touch ./$PACKAGEROOTDIR/pckg/__init__.py
+touch ./$PACKAGEROOTDIR/pckg/$PACKAGENAME/src/__init__.py
+touch ./$PACKAGEROOTDIR/pckg/README.md
+touch ./$PACKAGEROOTDIR/pckg/README.md
