@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#Argument validation check
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <database> <user> <password>"
+    exit 1
+fi
+
+TARGETFILE=$1
+
+#Operate
+say -f $TARGETFILE -o $TARGETFILE.aiff
+
+ffmpeg -i $TARGETFILE.aiff -f mp3 -acodec libmp3lame -ab 192000 -ar 44100 $TARGETFILE.mp3
+
+#Clean Up
+rm $TARGETFILE.aiff

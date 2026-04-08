@@ -5,3 +5,8 @@ Add Script to path.
 Server Scripting Repository
 
 ## Local Scripts
+text-to-mp3.bsh
+
+init-dev-database.bsh
+
+create-python-package.bsh
